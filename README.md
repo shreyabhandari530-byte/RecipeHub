@@ -117,6 +117,17 @@ All additional screenshots are available in the [screenshot folder](screenshot/)
 
 The main objective of RecipeHub is to provide a platform where users can easily share, discover, and explore different recipes while learning full-stack web development concepts.
 
+
+## Live Demo
+
+Frontend: https://recipe-hub-nine-psi.vercel.app/
+
+Backend: https://recipehub-backend-q24w.onrender.com
+
+## GitHub Repository
+
+https://github.com/shreyabhandari530-byte/RecipeHub
+
 ## 👩‍💻 Developed By
 
 **Shreya**
