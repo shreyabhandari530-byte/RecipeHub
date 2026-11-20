@@ -1,5 +1,15 @@
 // API Base URL
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Reads from Vite environment variable VITE_API_URL with fallback to local development server
+const getBaseApiUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (!envUrl) {
+    return 'http://localhost:5000/api';
+  }
+  const cleanUrl = envUrl.trim().replace(/\/+$/, '');
+  return cleanUrl.endsWith('/api') ? cleanUrl : `${cleanUrl}/api`;
+};
+
+const API_BASE_URL = getBaseApiUrl();
 
 // Visitor ID persistence key
 const VISITOR_ID_KEY = 'recipehub_visitor_id';
@@ -62,7 +72,7 @@ export async function apiRequest(endpoint, options = {}) {
   } catch (error) {
     // If backend is not reachable (network offline / server down)
     if (error.name === 'TypeError' && error.message.includes('fetch')) {
-      const connError = new Error('Cannot connect to RecipeHub server. Please ensure the backend is running on http://localhost:5000.');
+      const connError = new Error(`Cannot connect to RecipeHub server (${API_BASE_URL}). Please ensure the backend is running and accessible.`);
       connError.status = 0;
       throw connError;
     }
